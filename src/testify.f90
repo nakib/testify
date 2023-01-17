@@ -77,21 +77,6 @@ contains
 
     call print_test_result(self%name, self%status)
   end subroutine assert_array
-
-  subroutine print_test_result(name, passed)
-    logical, intent(in) :: passed
-    character(*), intent(in) :: name
-    
-    character(:), allocatable :: message_head, message_butt
-
-    message_head = name // ' => ' // achar(27)
-    message_butt = achar(27) // '[0m'
-    if(passed) then
-       print *, message_head // '[32m PASSED! :)' // message_butt
-    else
-       print *, message_head // '[31m FAILED! :(' // message_butt
-    end if
-  end subroutine print_test_result
   
   elemental logical function assert_elemental(self, val, ref)
     class(testify), intent(in) :: self
@@ -171,6 +156,21 @@ contains
        end select
     end select
   end function assert_elemental
+
+  subroutine print_test_result(name, passed)
+    logical, intent(in) :: passed
+    character(*), intent(in) :: name
+
+    character(:), allocatable :: message_head, message_butt
+
+    message_head = name // ' => ' // achar(27)
+    message_butt = achar(27) // '[0m'
+    if(passed) then
+       print *, message_head // '[32m PASSED! :)' // message_butt
+    else
+       print *, message_head // '[31m FAILED! :(' // message_butt
+    end if
+  end subroutine print_test_result
   
   subroutine report(self)
     class(testify), intent(in) :: self
@@ -179,7 +179,6 @@ contains
     print*, ' Tests carried out: [', self%name , ']'
     print*, ' Total number of tests: ', self%test_count
     print*, ' Number of tests passed: ', self%pass_count
-    print*, ' Number of tests failed: ', self%test_count - self%pass_count
     print*, '+--------------------------------------------------+'
   end subroutine report
 end module testify_m
