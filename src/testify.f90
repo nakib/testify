@@ -31,7 +31,7 @@ module testify_m
      integer, private :: pass_count = 0
      
    contains
-     procedure, public :: append_to_name, report
+     procedure, public :: rename, report
      generic, public :: operator(+) => compose
      generic,  public :: assert => assert_scalar, assert_array
      procedure, private :: assert_scalar, assert_array, assert_elemental, &
@@ -60,12 +60,12 @@ contains
     composed%pass_count = self%pass_count + other%pass_count
   end function compose
   
-  subroutine append_to_name(self, name)
+  subroutine rename(self, name)
     class(testify), intent(inout) :: self
     character(*), intent(in) :: name
 
-    self%name = self%name // '; ' // name
-  end subroutine append_to_name
+    self%name = name
+  end subroutine rename
     
   subroutine assert_scalar(self, val, ref)
     class(testify), intent(inout) :: self
