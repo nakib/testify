@@ -73,7 +73,8 @@ contains
 
     self%test_count = self%test_count + 1
     
-    self%status = self%assert_elemental(val, ref) .eqv. .true.
+    self%status = .false. .or. &
+         (self%assert_elemental(val, ref) .eqv. .true.)
 
     if(self%status) self%pass_count = self%pass_count + 1
 
@@ -86,7 +87,8 @@ contains
     
     self%test_count = self%test_count + 1
     
-    self%status = all(self%assert_elemental(val, ref) .eqv. .true.)
+    self%status = .false. .or. &
+         (all(self%assert_elemental(val, ref) .eqv. .true.))
 
     if(self%status) self%pass_count = self%pass_count + 1
 
