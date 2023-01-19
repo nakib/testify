@@ -63,7 +63,6 @@ contains
   end function testify_array
   
   pure function compose(self, other) result(composed)
-    !class(testify), intent(in) :: self, other
     class(testify), intent(in) :: self
     type(testify), intent(in) :: other
     type(testify) :: composed
