@@ -31,7 +31,7 @@ module testify_m
      integer, private :: pass_count = 0
      
    contains
-     procedure, public :: rename, report
+     procedure, public :: rename, report, get_status
      generic, public :: operator(+) => compose
      generic,  public :: assert => assert_scalar, assert_array
      procedure, private :: assert_scalar, assert_array, assert_elemental, &
@@ -66,6 +66,12 @@ contains
 
     self%name = name
   end subroutine rename
+
+  pure logical function get_status(self)
+    class(testify), intent(in) :: self
+
+    get_status = self%status
+  end function get_status
     
   subroutine assert_scalar(self, val, ref)
     class(testify), intent(inout) :: self
