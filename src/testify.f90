@@ -39,19 +39,33 @@ module testify_m
   end type testify
 
   interface testify
-     module procedure constructor
+     module procedure testify_name
+     module procedure testify_array
   end interface testify
 contains
 
-  function constructor(name) result(test_object)
+  function testify_name(name) result(test_object)
     character(*), intent(in) :: name
     type(testify) :: test_object
 
     test_object%name = name
-  end function constructor
+  end function testify_name
 
+  function testify_array(array) result(summed)
+    type(testify), intent(in) :: array(:)
+    type(testify) :: summed
+    integer :: itest
+
+    summed = array(1)
+    do itest = 2, size(array)
+       summed = summed + array(itest)
+    end do
+  end function testify_array
+  
   pure function compose(self, other) result(composed)
-    class(testify), intent(in) :: self, other
+    !class(testify), intent(in) :: self, other
+    class(testify), intent(in) :: self
+    type(testify), intent(in) :: other
     type(testify) :: composed
 
     composed%name = self%name // '; ' // other%name
