@@ -36,10 +36,8 @@
     You can pass in a tolerance for real arithmetic:
 
 #+BEGIN_SRC fortran
-     test2 = testify('1.0 - 9.0e-1 = 0.1 with tolerance 1.0e-7')
-#+END_SRC
-#+BEGIN_SRC fortran
-     call test2%assert(val = 1.0 - 9.0e-1, ref = 0.1, tol = 1.0e-7)
+        test2 = testify('1.0 - 9.0e-1 = 0.1 with tolerance 1.0e-7')
+	call test2%assert(val = 1.0 - 9.0e-1, ref = 0.1, tol = 1.0e-7)
 #+END_SRC
 
     This creates the following output:
@@ -78,17 +76,9 @@
     This prints to screen a summary:
 
 
-    ~------>~
-
-
-    ~Total number of tests:        3~
-
-
-    ~Number of tests passed:       2~
-
-
-    ~Number of tests failed:       1~
-
-
-    ~<------~
+    #+BEGIN_SRC
+    Total number of tests:        3
+    Number of tests passed:       2
+    Number of tests failed:       1
+    #+END_SRC
 
