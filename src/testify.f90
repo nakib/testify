@@ -76,7 +76,7 @@ contains
   subroutine rename(self, name)
     class(testify), intent(inout) :: self
     character(*), intent(in) :: name
-
+    
     self%name = name
   end subroutine rename
 
@@ -141,7 +141,7 @@ contains
        type is(character(*))
           assert_elemental = val == ref
        end select
-
+       
     type is(integer(i8))
        select type(ref)
        type is(integer(i8))
@@ -261,19 +261,20 @@ contains
     message_head = name // ' => ' // achar(27)
     message_butt = achar(27) // '[0m'
     if(passed) then
-       print *, message_head // '[32m PASSED! :)' // message_butt
+       write(*, '(A)') " " // message_head // '[32m PASSED! :)' // message_butt
     else
-       print *, message_head // '[31m FAILED! :(' // message_butt
+       write(*, '(A)') " " // message_head // '[31m FAILED! :(' // message_butt
     end if
   end subroutine print_test_result
   
   subroutine report(self)
     class(testify), intent(in) :: self
-
-    print*, '+--------------------------------------------------+'
-    print*, ' Tests carried out: [', self%name , ']'
-    print*, ' Total number of tests: ', self%test_count
-    print*, ' Number of tests passed: ', self%pass_count
-    print*, '+--------------------------------------------------+'
+    
+    write(*, '(A)') "------>"
+    write(*, '(A, I6)') ' Total number of tests:   ', self%test_count
+    write(*, '(A, I6)') ' Number of tests passed:  ', self%pass_count
+    write(*, '(A, I6)') ' Number of tests failed:  ', self%test_count - self%pass_count
+    write(*, '(A)') "<------"
+    write(*, '(A)')
   end subroutine report
 end module testify_m
