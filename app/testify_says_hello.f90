@@ -141,7 +141,9 @@ contains
              write(io, '(A)')
           end select
        else
+          write(io, '(A)')
           write(io, '(A)') "    " // string
+          write(io, '(A)')
        end if
               
        close(io)

@@ -1,50 +1,82 @@
 * Testify
+
     Hello from testify!
+
+
     Here's what you can do with it:
+
+
     Create a test with a meaningful name as follows:
+
 #+BEGIN_SRC fortran
      test1 = testify('2 + 3 = 5')
 #+END_SRC
+
     Assert as follows:
+
 #+BEGIN_SRC fortran
      call test1%assert(val = 2 + 3, ref = 5)
 #+END_SRC
+
     This creates the following output:
+
 
     ~2 + 3 = 5 =>  PASSED! :)~
 
+
     You can get the status of this test with:
+
 #+BEGIN_SRC fortran
      test1%get_status()
 #+END_SRC
+
     This will return a logical which, in this case, is true.
+
+
     You can pass in a tolerance for real arithmetic:
+
 #+BEGIN_SRC fortran
      test2 = testify('1.0 - 9.0e-1 = 0.1 with tolerance 1.0e-7')
 #+END_SRC
 #+BEGIN_SRC fortran
      call test2%assert(val = 1.0 - 9.0e-1, ref = 0.1, tol = 1.0e-7)
 #+END_SRC
+
     This creates the following output:
+
 
     ~1.0 - 0.9 = 0.1 with tolerance 1.0e-7 =>  PASSED! :)~
 
+
     Your turn. Define test3 to do the same as test2 but with a tolerance 1.0e-8.
+
+
     You should get the following output:
+
 
     ~1.0 - 0.9 = 0.1 with tolerance 1.0e-8 =>  FAILED! :(~
 
+
     Instead of an unspecified precision, you can pass in any of the iso_fortran_env precisions.
+
+
     However, 'assert' will not accept 'val', 'ref', and 'tol' with different precisions.
+
+
     You can combine individual tests with a '+' operator as follows:
+
 #+BEGIN_SRC fortran
      all_tests = test1 + test2 + test3
 #+END_SRC
+
     Following this you can create a combined report by saying:
+
 #+BEGIN_SRC fortran
      call all_tests%report
 #+END_SRC
+
     This prints to screen a summary:
+
 
     ~------>~
 
