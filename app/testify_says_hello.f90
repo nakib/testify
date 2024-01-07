@@ -132,9 +132,13 @@ contains
              write(io, '(A)') "    " // string
              write(io, '(A)') "#+END_SRC"
           case('v') !verbatim
+             write(io, '(A)')
              write(io, '(A)') "    ~" // string // "~"
+             write(io, '(A)')
           case default
+             write(io, '(A)')
              write(io, '(A)') "    " // string
+             write(io, '(A)')
           end select
        else
           write(io, '(A)') "    " // string
